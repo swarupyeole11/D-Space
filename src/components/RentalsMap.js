@@ -1,5 +1,5 @@
 import React from "react";
-import { Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { Map, GoogleApiWrapper ,Marker} from "google-maps-react";
 import { useState, useEffect } from "react";
 
 function RentalsMap({ locations, google, setHighLight }) {
@@ -22,14 +22,16 @@ function RentalsMap({ locations, google, setHighLight }) {
           google={google}
           containerStyle={{
             width: "50vw",
-            height: "calc(100vh - 135px)",
+            height: "calc(100vh - 135px)", //PLEASE ALWAYS KEEP THE - SIGN SEPERATED OR IT WILL NOT RENDER YOUR MAP
           }}
           center={center}
           initialCenter={locations[0]}
           zoom={13}
           disableDefaultUI={true}
         >
-          
+          {locations.map((coords, i) => (
+            <Marker position={coords} onClick={() => setHighLight(i)} />
+          ))}
         </Map>
       )}
     </>
@@ -37,10 +39,5 @@ function RentalsMap({ locations, google, setHighLight }) {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "",
+  apiKey: "AIzaSyDav2AiYDTJePRGx9WKD2ObjosnTRNEHag",
 })(RentalsMap);
-
-
-
-
-

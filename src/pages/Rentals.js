@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import logo from "../images/airbnbRed.png"
 import { Button, ConnectButton ,Icon } from "web3uikit";
 import RentalsMap from "../components/RentalsMap";
+import { useState } from "react";
+
 
 const Rentals = () => {
   //  This hook returns the location object used by the react-router.
@@ -14,6 +16,7 @@ const Rentals = () => {
   //The “search” property of the location object returns a string containing the query part of the URL.
 
   const { state: searchFilters } = useLocation();  // we have done destructuring hee and we will be refering state object which contains all the information which we passes using use state variable as searchFilter this is known as aliasing
+  const {highlight ,setHighLight} = useState();
   const rentalsList = [
     {
       attributes: {
@@ -93,12 +96,12 @@ const Rentals = () => {
 
 
           {rentalsList &&
-            rentalsList.map((e) => {
+            rentalsList.map((e,i) => {
               //here e is a parmeter which point to the object we are acessing
               return (
                 <>
                   <hr className="line2" />
-                  <div className="rentalDiv">
+                  <div className={highlight == i?"rentalDivH":"rentalDiv"}>
                     <img className="rentalImg" src="e.attributes.imgUrl" />
                     <div className="rentalInfo">
                       <div className="rentalTitle">{e.attributes.name}</div>
@@ -123,7 +126,7 @@ const Rentals = () => {
             })}
         </div>
         <div className="rentalsContentR">
-          <RentalsMap locations={cords}/> {/* PASSING IN THE LATITUDE AND LONGITUDE TO THE RENTALS MAP COMPONENT */}
+          <RentalsMap locations={cords} setHighLight={setHighLight}/> {/* PASSING IN THE LATITUDE AND LONGITUDE TO THE RENTALS MAP COMPONENT */}
         </div>
       </div>
     </>

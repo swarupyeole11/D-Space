@@ -35,8 +35,8 @@ const Rentals = () => {
   //pushing object which contains latitudes and longitudes
   // (e) refers to each element in the array  here the array is an array of object -> object  FOR MORE INFO CHECK DOCUMENTATION USING CNTRL+CLICK
 
-  rentalsList.forEach((e,x)=>{
-    cords.push({lat: e.attributes.lat, lng : e.attributes.long,index : x})
+  rentalsList.forEach((e)=>{
+    cords.push({lat: e.attributes.lat, lng : e.attributes.long})
   });
   
   // console.log(cords); 
